@@ -48,14 +48,14 @@ export const Header = () => {
 
       <NavbarContent className="basis-1/5 sm:basis-full" justify="center">
         <ul className="hidden lg:flex gap-4 justify-start ml-2">
-          {siteConfig.menus.map((item) => {
+          {siteConfig.menus.map((item, index) => {
             const label = item.label?.toLocaleLowerCase();
             const isDropdown = item.children.length > 0;
             const isActive = pathname.includes(label) || pathname === item.href ? label : "";
 
             if(isDropdown) {
               return (
-                <Dropdown key={item.href}>
+                <Dropdown key={index}>
                   <DropdownTrigger>
                     <NavbarItem>
                       <NextLink
@@ -73,8 +73,8 @@ export const Header = () => {
                     </NavbarItem>
                   </DropdownTrigger>
                   <DropdownMenu>
-                    {item.children.map((child, index) => (
-                      <DropdownItem key={`${child}-${index}`}>
+                    {item.children.map((child, idx) => (
+                      <DropdownItem key={idx}>
                         <Link
                           color={isActive ? "primary" : "foreground"}
                           href="#"
@@ -138,25 +138,25 @@ export const Header = () => {
             if(isDropdown) {
               return (
                 <MobileNavDropdown
-                defaultExpandedKeys={isActive}
-                key={index}
-                ariaLabel={label}
-                item={item as TabProps}
-                placement="bottom"
-                fullWidth
-                size="md"
-                radius='none'
-                className=''
-                classNames={{
-                  base: "w-full data-[hover=true]:text-primary",
-                  trigger: "w-full py-4 gap-4 px-2 data-[hover=true]:text-primary data-[open=true]:text-primary data-[open=true]:font-bold divider-y",
-                  title: ["text-sm text-inherit hover:text-primary hover:font-bold data-[open=true]:text-primary"],
-                }}
-                variant="light"
-              >
-                {item.children.map((dropdown) => {
+                  key={index}
+                  defaultExpandedKeys={isActive}
+                  ariaLabel={label}
+                  item={item as TabProps}
+                  placement="bottom"
+                  fullWidth
+                  size="md"
+                  radius='none'
+                  className=''
+                  classNames={{
+                    base: "w-full data-[hover=true]:text-primary",
+                    trigger: "w-full py-4 gap-4 px-2 data-[hover=true]:text-primary data-[open=true]:text-primary data-[open=true]:font-bold divider-y",
+                    title: ["text-sm text-inherit hover:text-primary hover:font-bold data-[open=true]:text-primary"],
+                  }}
+                  variant="light"
+                >
+                {item.children.map((dropdown, idx) => {
                   return (
-                    <NavbarMenuItem key={`${item}-${index}`}>
+                    <NavbarMenuItem key={idx}>
                       <Link
                         color={isActive ? "primary" : "foreground"}
                         href={dropdown.href}
