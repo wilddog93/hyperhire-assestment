@@ -116,7 +116,7 @@ export const Header = () => {
             isExternal
             as={Link}
             className="text-sm font-normal text-primary bg-white"
-            href={siteConfig.links.sponsor}
+            href='/'
             variant="flat"
           >
             문의하기
